@@ -1,0 +1,142 @@
+<CreateGameInterface>:
+    name: "create"
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: 5
+        AppBar:
+            title: "Create a New game"
+
+        MDSegmentedControl:
+            on_active: root.on_initial_points_selected(*args)
+            md_bg_color: (173/255, 216/255, 230/255, 1)
+            size_hint: (None, None)
+            width: 500
+            height: 50
+            pos_hint: {"center_x": 0.5}
+
+            MDSegmentedControlItem:
+                text: "301"
+
+            MDSegmentedControlItem:
+                text: "501"
+
+            MDSegmentedControlItem:
+                text: "701"
+
+        MDBoxLayout:
+            orientation: "horizontal"
+            size_hint_x: None
+            width: 500
+            pos_hint: {"center_x": 0.5}
+            spacing:5
+            Title:
+                pos_hint: {"center_y": 0.5}
+                text: "Number of Players"
+                halign: "center"
+            CustomSpinBox:
+                id: number_of_players
+                difference: 1
+
+        MDBoxLayout:
+            orientation: "horizontal"
+            size_hint_x: None
+            width: 500
+            pos_hint: {"center_x": 0.5}
+            spacing:5
+
+            Title:
+                pos_hint: {"center_y": 0.5}
+                text: "Double/Triple In"
+                halign: "center"
+
+            Options:
+                on_text: root.set_in_option(self.text)
+        MDBoxLayout:
+            orientation: "horizontal"
+            size_hint_x: None
+            width: 500
+            pos_hint: {"center_x": 0.5}
+            spacing:5
+
+            Title:
+                pos_hint: {"center_y": 0.5}
+                text: "Double/Triple Out"
+                halign: "center"
+
+            Options:
+                on_text: root.set_out_option(self.text)
+
+        MDBoxLayout:
+            orientation: "horizontal"
+            size_hint_x: None
+            width: 500
+            pos_hint: {"center_x": 0.5}
+            spacing:5
+            Title:
+                pos_hint: {"center_y": 0.5}
+                text: "Number of Legs"
+                halign: "center"
+            CustomSpinBox:
+                id: number_of_legs
+
+        MDBoxLayout:
+            orientation: "horizontal"
+            size_hint_x: None
+            width: 500
+            pos_hint: {"center_x": 0.5}
+            spacing:5
+            Title:
+                pos_hint: {"center_y": 0.5}
+                text: "Number of Sets"
+                halign: "center"
+            CustomSpinBox:
+                id: number_of_sets
+
+        HomeNavigation:
+            text: "Start the Game"
+            on_press:
+                root.start_game()
+                root.manager.current = "game"
+
+<Options@Spinner>:
+    text: "None"
+    values: ["None", "Double", "Triple"]
+    size_hint: (None, None)
+    width: "150dp"
+    height: "40dp"
+    pos_hint: {"center_y": 0.5}
+    background_normal: ""
+    background_color: "lightblue"
+    canvas.before:
+        Color:
+            rgba: (173/255, 216/255, 230/255, 1)
+        RoundedRectangle:
+            pos: self.pos
+            size:self.size
+            radius: [25]
+
+
+<CustomSpinBox>:
+    orientation: "horizontal"
+    spacing: 5
+    size_hint: (None, None)
+    width: "150dp"
+    height: "40dp"
+    pos_hint: {"center_y": 0.5}
+    ControlBtn:
+        icon: "minus"
+        on_press: root.decrease()
+    MDLabel:
+        text: str(root.nb)
+        halign: "center"
+    ControlBtn:
+        icon: "plus"
+        on_press: root.increase()
+
+
+
+<ControlBtn@MDIconButton>:
+    md_bg_color: (173/255, 216/255, 230/255, 1)
+    size_hint: (None, None)
+    size:("40dp", "40dp")
+    pos_hint: {"center_x": 0.5}

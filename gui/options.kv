@@ -1,0 +1,76 @@
+
+<OptionsInterface>:
+    name: "options"
+    MDBoxLayout:
+        orientation: "vertical"
+        AppBar:
+            title: "Options"
+        Space:
+        MDBoxLayout:
+            orientation: "horizontal"
+            size_hint_x: None
+            width: 500
+            pos_hint: {"center_x": 0.5}
+            spacing:5
+
+            Title:
+                pos_hint: {"center_y": 0.5}
+                text: "Language"
+                halign: "center"
+            Spinner:
+                id: languageSpinner
+                text: "English"
+                values: ["English", "German"]
+                size_hint: (None, None)
+                width: "150dp"
+                height: "40dp"
+                pos_hint: {"center_y": 0.5}
+                background_normal: ""
+                background_color: "lightblue"
+                canvas.before:
+                    Color:
+                        rgba: (173/255, 216/255, 230/255, 1)
+                    RoundedRectangle:
+                        pos: self.pos
+                        size:self.size
+                        radius: [25]
+
+                on_text: root.select_language(self.text)
+
+
+        MDBoxLayout:
+            orientation: "horizontal"
+            size_hint_x: None
+            width: 500
+            pos_hint: {"center_x": 0.5}
+            spacing:5
+
+            Title:
+                pos_hint: {"center_y": 0.5}
+                text: "Dark Mode"
+                halign: "center"
+
+            CheckBox:
+                pos_hint: {"center_y": 0.5}
+                on_active: root.dark_mode_is_checked(self, self.active)
+                color: (0, 0, 0, 1)
+
+        MDBoxLayout:
+            orientation: "horizontal"
+            size_hint_x: None
+            width: 500
+            pos_hint: {"center_x": 0.5}
+            spacing:5
+
+            Title:
+                pos_hint: {"center_y": 0.5}
+                text: "Voice command"
+                halign: "center"
+
+            CheckBox:
+                pos_hint: {"center_y": 0.5}
+                on_active: root.voice_is_checked(self, self.active)
+                color: (0, 0, 0, 1)
+
+                active: root.with_voice_commande
+        Space:

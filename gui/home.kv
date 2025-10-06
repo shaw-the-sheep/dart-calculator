@@ -1,0 +1,31 @@
+<HomeInterface>:
+    name: "home"
+    MDBoxLayout:
+        orientation: "vertical"
+        size_hint: (1, 1)
+        spacing: "25dp"
+        pos_hint: {"center_y": 0.5}
+        MDLabel:
+            text: "home"
+            font_size: 25
+            md_bg_color: "lightblue"
+            halign: "center"
+            size_hint: (1, None)
+            height: "50dp"
+        Title:
+            text: "Welcome to dart calculator"
+        HomeNavigation:
+            text: "create Game"
+            on_press:
+                root.manager.current = "create"
+
+        HomeNavigation:
+            text: "Load Game"
+            on_press:
+                root.manager.current = "load"
+
+        HomeNavigation:
+            text: "Options"
+            on_press:
+                root.manager.current = "options"
+        Space:

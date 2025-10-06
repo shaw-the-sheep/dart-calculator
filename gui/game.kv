@@ -1,0 +1,124 @@
+<GameInterface>:
+    name: "game"
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: 10
+        AppBar:
+            title: "Game"
+
+        ScrollView:
+            size_hint: (1, 1)
+            scroll_type: ["content"]
+            PlayersView:
+                id: players_view
+                size_hint_y: None
+                height: self.minimum_height
+                adaptative_height: True
+                padding: "8dp"
+                spacing: 10
+
+        MDBoxLayout:
+            orientation: "horizontal"
+            spacing: 10
+            size_hint_x:0.5
+            pos_hint: {"center_x": 0.5}
+            size_hint_y: None
+            height: dp(50)
+
+            MDIconButton:
+                icon: "backspace"
+                size_hint: (None, None)
+                size: (dp(40), dp(40))
+                on_press: root.backspace_hit()
+
+            MDIconButton:
+                icon: "check-decagram"
+                size_hint: (None, None)
+                size: (dp(40), dp(40))
+                on_press: root.next_player()
+
+        NumberZone:
+
+
+<Player>:
+    orientation: "vertical"
+    padding: "10dp"
+    md_bg_color: (173/255, 216/255, 230/255, 1)
+    radius: [12,]
+    adaptative_height: True
+    size_hint_y: None
+    height: dp(150)
+    spacing:5
+    canvas.before:
+        Color:
+            rgba: (0, 0.6, 1, 1) if self.is_playing else (0, 0, 0, 0)
+        Line:
+            width: 2
+            rounded_rectangle: (self.x, self.y, self.width, self.height, 12)
+
+    MDLabel:
+        id: name
+        text: root.player_name
+        halign: 'center'
+        font_style: 'H6'
+
+    MDLabel:
+        id: score
+        text: str(root.player_score)
+        halign: 'center'
+        theme_text_color: 'Secondary'
+
+    MDLabel:
+        id: history
+        text: root.history_list
+
+    MDBoxLayout:
+        orientation: "horizontal"
+        spacing: 10
+        MDLabel:
+            text: "Legs won: "
+            halign: 'center'
+            font_size: 15
+
+        MDLabel:
+            text: str(root.nb_legs)
+            halign: 'center'
+            font_size: 15
+
+        MDLabel:
+            text: "Sets won: "
+            halign: 'center'
+            font_size: 15
+
+        MDLabel:
+            text: str(root.nb_sets)
+            halign: 'center'
+            font_size: 15
+
+<ScoreLabel@MDLabel>:
+    md_bg_color: (210, 210, 210, 1)
+    size_hint_y: 1
+    size_hint_x: 0.3
+    font_size: 15
+
+<PopUpContent>:
+    orientation: "vertical"
+    spacing: dp(10)
+    MDLabel:
+        md_bg_color: (210, 210, 210, 1)
+        size_hint: (1, 1)
+        font_size: 20
+        text: root.winner
+        halign: "center"
+
+    HomeNavigation:
+        text: "Restart"
+        on_release: root.restart_game()
+
+    HomeNavigation:
+        text: "Restart with different parameters"
+        on_press: root.restart_game_with_different_parameters()
+
+    HomeNavigation:
+        text: "Home"
+        on_press: root.go_home()
